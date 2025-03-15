@@ -9,7 +9,7 @@ function App() {
   // State to hold the list of articles
   const [articles, setArticles] = useState([]);
 
- // Step 3: Fetch articles from the Django API when the component mounts
+ // Fetch articles from the Django API when the component mounts
  useEffect(() => {
   fetch('http://localhost:8000/api/articles/')
     .then(response => response.json())
