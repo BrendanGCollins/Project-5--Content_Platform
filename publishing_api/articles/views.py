@@ -1,8 +1,8 @@
 # Import generics from Django REST Framework.
 from rest_framework import generics
 
-# Import HttpResponse to return a simple text response for the homepage.
-from django.http import HttpResponse
+# Import render to render HTML templates.
+from django.shortcuts import render
 
 # Import the Article model from the current app's models.
 from .models import Article
@@ -16,6 +16,10 @@ class ArticleListCreateAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all().order_by('-created_at')
     serializer_class = ArticleSerializer
 
-# Define a simple home view for the default homepage.
+# Define the home view for the default homepage.
+# This view fetches all articles and renders the home.html template.
 def home(request):
-    return HttpResponse("Welcome to the Community Publishing Platform API!")
+    # Retrieve all articles, ordered by most recent first.
+    articles = Article.objects.all().order_by('-created_at')
+    # Render the 'home.html' template and pass the articles to it.
+    return render(request, 'home.html', {'articles': articles})
