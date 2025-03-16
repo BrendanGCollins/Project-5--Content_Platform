@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - World Views and News</title>
+</head>
+<body>
+    <h1>Welcome to the Community Publishing Platform API!</h1>
+    <h2>Articles</h2>
+    {% if articles %}
+        <ul>
+        {% for article in articles %}
+            <li>
+                <strong>{{ article.title }}</strong><br>
+                {{ article.content }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No articles available.</p>
+    {% endif %}
+</body>
+</html>
