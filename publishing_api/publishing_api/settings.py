@@ -17,8 +17,12 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
-# Application definition
+# Allow CORS requests from the React app running on port 3001.
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3001",
+]
 
+# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,13 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',      # Added Django REST Framework
-    'corsheaders',         # Added for handling Cross-Origin Resource Sharing
+    'rest_framework',      # Django REST Framework
+    'corsheaders',         # For handling CORS
     'articles',            # Your app for articles
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Must be at the top for CORS to work
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
