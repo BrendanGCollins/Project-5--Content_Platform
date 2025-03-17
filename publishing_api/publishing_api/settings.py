@@ -13,7 +13,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = env.bool("DEBUG", default=False)
 
 # Allow Heroku & Local Requests
 ALLOWED_HOSTS = [
@@ -75,17 +75,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "publishing_api.wsgi.application"
 
-# Configure PostgreSQL database using environment variables
+import dj_database_url
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("DATABASE_NAME"),
-        "USER": env("DATABASE_USER"),
-        "PASSWORD": env("DATABASE_PASSWORD"),
-        "HOST": env("DATABASE_HOST"),
-        "PORT": env("DATABASE_PORT"),
-    }
+    "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
