@@ -1,20 +1,24 @@
-# Import the admin site for the Django admin interface.
+# Import Django's admin module for admin panel access
 from django.contrib import admin
 
-# Import 'path' and 'include' to create URLs and include other URL files.
+# Import 'path' and 'include' for URL routing
 from django.urls import path, include
 
-# Import the home view from the articles app.
-from articles.views import home
+# Import TemplateView to serve React's frontend
+from django.views.generic import TemplateView
+import os
 
-# Define the URL patterns for the project.
+# Define URL patterns for the project
 urlpatterns = [
-    # Root URL now points to the home view.
-    path('', home, name='home'),
-    
-    # The admin site is available at '/admin/'.
-    path('admin/', admin.site.urls),
-    
-    # Include the URL patterns from the articles app under '/api/'.
-    path('api/', include('articles.urls')),
+    # The Django admin panel
+    path("admin/", admin.site.urls),
+
+    # Include API endpoints from the 'articles' app
+    path("api/", include("articles.urls")),
 ]
+
+# Serve React app for all other routes in production
+if os.getenv("DJANGO_PRODUCTION", False):  # Only in production
+    urlpatterns += [
+        path("", TemplateView.as_view(template_name="index.html")),
+    ]
