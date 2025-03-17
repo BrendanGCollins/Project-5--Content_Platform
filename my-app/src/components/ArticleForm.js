@@ -15,7 +15,7 @@ const ArticleForm = ({ addArticle }) => {
     const newArticle = { title, content };
 
     // Send a POST request to the Django API to add the new article.
-    fetch('http://localhost:8000/api/articles/', {
+    fetch('/api/articles/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // Convert the article object to a JSON string.

@@ -13,7 +13,7 @@ function App() {
 
   // Fetch articles from the Django API when the component mounts.
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/articles/')
+    fetch('/api/articles/')
       .then((response) => {
         // If the response is not OK, throw an error.
         if (!response.ok) {
@@ -40,7 +40,7 @@ function App() {
 
   // Callback function to delete an article.
   const deleteArticle = (id) => {
-    fetch(`http://127.0.0.1:8000/api/articles/${id}/delete/`, {
+    fetch(`/api/articles/${id}/delete/`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -60,7 +60,7 @@ function App() {
   // Callback function to handle search filters.
   const handleSearch = (filters) => {
     const { title, category } = filters;
-    let url = 'http://127.0.0.1:8000/api/articles/search/?';
+    let url = '/api/articles/search/?';
     if (title) url += `title=${encodeURIComponent(title)}&`;
     if (category) url += `category=${encodeURIComponent(category)}&`;
     fetch(url)

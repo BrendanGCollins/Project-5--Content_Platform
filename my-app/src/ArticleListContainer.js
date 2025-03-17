@@ -14,7 +14,7 @@ const ArticleListContainer = () => {
   // useEffect runs once when the component mounts.
   useEffect(() => {
     // Fetch articles from the API.
-    fetch('http://127.0.0.1:8000/api/articles/')
+    fetch('/api/articles/')
       .then(response => {
         // Check if the response is OK (status in the range 200-299).
         if (!response.ok) {
