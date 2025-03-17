@@ -1,0 +1,1 @@
+web: gunicorn publishing_api.wsgi --log-file -
